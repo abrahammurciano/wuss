@@ -20,7 +20,7 @@ numWinsInDesk=$(wmctrl -l | awk -v workspace=$workspace '{ if ($2 == dektop) pri
 # maximise active window
 wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
 
-if (($numWinsInDesk > 1)); then
+if (($numWinsInDesk > 1 || $workspace == 0)); then
 
 	# create a new workspace
 	wmctrl -n $nWorkspaces
