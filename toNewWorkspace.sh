@@ -12,7 +12,8 @@ lastWorkspace=$(xprop -root | grep _NET_NUMBER_OF_DESKTOPS\( | awk '{print $3}')
 ((nWorkspaces=$lastWorkspace+1))
 
 # get current workspace
-workspace=$(wmctrl -d | awk '{ if ($2 == "'*'") print $0}' | cut -d ' ' -f1)
+workspace=$(xprop -root | grep _NET_CURRENT_DESKTOP\( | awk '{print $3}')
+[ "$workspace" == "" ] && workspace=0
 
 # get number of windows in current workspace
 numWinsInDesk=$(wmctrl -l | awk -v workspace=$workspace '{ if ($2 == dektop) print $0}' | wc -l)
